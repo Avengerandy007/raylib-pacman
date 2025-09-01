@@ -1,6 +1,7 @@
 #pragma once
 #include "EntityModules.hpp"
 #include <memory>
+#include <vector>
 #include <string>
 
 enum TypeId{
@@ -34,6 +35,7 @@ public:
 
 class Coin : public Entity{
 public:
+	static uint8_t coinCount;
 	static ImageTexture& Texture();
 	Coin();
 	void Update() override;
