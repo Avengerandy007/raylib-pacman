@@ -1,5 +1,4 @@
 #include "../include/Update.hpp"
-#include <iostream>
 bool running = false;
 void ResfreshWindow(){
         BeginDrawing();
@@ -25,7 +24,6 @@ void UpdateTiles(){
 
 void Update(){
 	running = true;
-	std::cout << "Coin count in level: " << (int)Coin::coinCount << "\n";
         while (running){
                 if (WindowShouldClose()) running = false;
                 ResfreshWindow();
