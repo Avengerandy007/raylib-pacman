@@ -1,0 +1,3 @@
+# Ignore all Raylib source files from language stats
+Raylib/** linguist-vendored
+Raylib/** linguist-detectable=false
