@@ -9,6 +9,7 @@ class Tile{
 public:
 	std::shared_ptr<Rectangle> m_def; //Definition of tile
 	std::unique_ptr<Entity>	m_containedEntity;
+	std::unique_ptr<Coin> m_coinContainer;
 	static void InitTileSet();
 	static void SetEntityRectangles();
 

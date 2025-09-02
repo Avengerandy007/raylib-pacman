@@ -2,7 +2,6 @@
 #include "../libpacman/include/Tile.hpp"
 #include "../include/Update.hpp"
 #include "../libpacman/include/Entity.hpp"
-#include "../libpacman/include/FileI.hpp"
 void InitRaylib(){
         SetTargetFPS(165);
         InitWindow(1000, 1000, "Pacman");
@@ -23,9 +22,7 @@ int main(){
 
         InitTextures();
 
-	Tile::tileSet = FileI::MakeMatrix(FileI::FindFile());
         Tile::InitTileSet();
-	Tile::SetEntityRectangles();
         Update();
 
         CloseWindow();
