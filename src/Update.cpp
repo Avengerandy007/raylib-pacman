@@ -9,6 +9,12 @@ void ResfreshWindow(){
         EndDrawing();
 }
 
+void Reload(){
+	Tile::tileSet = FileI::MakeMatrix(FileI::FindFile());
+   	Tile::InitTileSet();
+	Tile::SetEntityRectangles();
+}
+
 void UpdateTiles(){
 	Player* player;
         for (uint8_t i = 0; i < 20; i++){
@@ -18,7 +24,10 @@ void UpdateTiles(){
 			}
                         if (Tile::tileSet.matrix[i][k].m_containedEntity){
 				player = Tile::tileSet.matrix[i][k].m_containedEntity->typeId == PLAYER ? dynamic_cast<Player*>(Tile::tileSet.matrix[i][k].m_containedEntity.get()) : nullptr;
-				if (player && (int)player->score == (int)Coin::coinCount) running = false;
+				if (player && (int)player->score == (int)Coin::coinCount){
+					std::cout << "You win!\n";
+					Reload();
+				}
                                 Tile::tileSet.matrix[i][k].m_containedEntity->Update();
                         }
                 }
@@ -32,10 +41,7 @@ void Update(){
                 ResfreshWindow();
                 UpdateTiles();
 		if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_L)){
-			Tile::tileSet = FileI::MakeMatrix(FileI::FindFile());
-        		Tile::InitTileSet();
-			Tile::SetEntityRectangles();
-			std::cout << "Finished loading procedure\n";
+			Reload();
 		}
 	}
 }
