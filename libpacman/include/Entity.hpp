@@ -46,7 +46,7 @@ class Player : public Entity{
 	InputHandler input;
 	void HandleCollisions(Tile& currentTile);
 public:
-	uint32_t score;
+	static uint32_t score;
 	Controller controller;
 	static ImageTexture& Texture();
 	Player();
