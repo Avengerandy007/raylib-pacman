@@ -25,6 +25,7 @@ void UpdateTiles(){
 				if ((int)Player::score == (int)Coin::coinCount){
 					std::cout << "You win!\n";
 					Reload();
+					break;
 				}
                                 Tile::tileSet.matrix[i][k].m_containedEntity->Update();
                         }
