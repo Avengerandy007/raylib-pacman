@@ -1,5 +1,6 @@
 #include "../include/Update.hpp"
 #include "../libpacman/include/FileI.hpp"
+#include <fstream>
 bool running = false;
 void ResfreshWindow(){
         BeginDrawing();
@@ -10,7 +11,8 @@ void ResfreshWindow(){
 }
 
 void Reload(){
-	Tile::tileSet = FileI::MakeMatrix(FileI::FindFile());
+	std::ifstream file = FileI::FindFile();
+	Tile::tileSet = FileI::MakeMatrix(file);
    	Tile::InitTileSet();
 	Tile::SetEntityRectangles();
 }
