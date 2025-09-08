@@ -4,5 +4,4 @@
 
 extern bool running;
 extern void Update();
-extern void Reload();
 extern void UpdateTiles();

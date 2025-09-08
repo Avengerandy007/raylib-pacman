@@ -1,5 +1,6 @@
 #include "../include/Update.hpp"
 #include "../libpacman/include/FileI.hpp"
+#include "../include/Levels.hpp"
 #include <fstream>
 bool running = false;
 void ResfreshWindow(){
@@ -8,13 +9,6 @@ void ResfreshWindow(){
         ClearBackground(BLACK);
 
         EndDrawing();
-}
-
-void Reload(){
-	std::ifstream file = FileI::FindFile();
-	Tile::tileSet = FileI::MakeMatrix(file);
-   	Tile::InitTileSet();
-	Tile::SetEntityRectangles();
 }
 
 void UpdateTiles(){
@@ -26,7 +20,7 @@ void UpdateTiles(){
                         if (Tile::tileSet.matrix[i][k].m_containedEntity){
 				if ((int)Player::score == (int)Coin::coinCount){
 					std::cout << "You win!\n";
-					Reload();
+					LevelLogic::Reload();
 					break;
 				}
                                 Tile::tileSet.matrix[i][k].m_containedEntity->Update();
@@ -42,7 +36,7 @@ void Update(){
                 ResfreshWindow();
                 UpdateTiles();
 		if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_L)){
-			Reload();
+			LevelLogic::Reload();
 		}
 	}
 }

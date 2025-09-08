@@ -13,4 +13,11 @@ namespace LevelLogic{
 			list.push_back(FileI::FileContent(file));
 		}
 	}
+
+	void Reload(){
+		std::ifstream file = FileI::FindFile();
+		Tile::tileSet = FileI::MakeMatrix(file);
+   		Tile::InitTileSet(50);
+		Tile::SetEntityRectangles();
+	}
 }
