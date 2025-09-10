@@ -1,4 +1,5 @@
 #include "../include/Levels.hpp"
+#include <bits/stdc++.h>
 #include <cstdint>
 #include <filesystem>
 #include <fstream>
@@ -10,19 +11,32 @@ namespace LevelLogic{
 	void GetLevelData(std::vector<Level>& list){
 		for (const auto& entry : std::filesystem::directory_iterator("./levels")){
 			//Get file from dir
-			const std::string name = entry.path().string();
-			std::ifstream file(name);
-			if (file.bad()) continue;
+			std::ifstream file;
+			std::string name;
+			{
+				const std::string path = entry.path().string();
+				file.open(path);
+				
+				if (file.bad()) continue;
+				//Get the name of the file
+				uint16_t currentChar = path.length();
+				while (path[currentChar] != '/'){
+					currentChar--;
+					name += path[currentChar];
+				}
+				
+				std::reverse(name.begin(), name.end());
+			}
 			
 			//Create level and assign data to it
 			Level level;
-			level.name = name;
 			level.data = FileI::FileContent(file);
 			//Get coin count of level
 			{
 				uint16_t currentChar = 0;
 				std::string coinCount = "";
-				while(currentChar <= 400){
+				// ammount of coins can't be bigger than 3 chars +1 for ','
+				while(currentChar <= 4){
 					if (level.data[currentChar] == ','){
 						level.data.erase(level.data.begin() + currentChar);
 						break;
@@ -33,6 +47,7 @@ namespace LevelLogic{
 				level.coinCount = std::stoi(coinCount);
 			}
 			
+			level.name = name;
 
 			list.push_back(level);
 		}
