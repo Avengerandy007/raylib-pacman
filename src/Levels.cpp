@@ -19,7 +19,7 @@ namespace LevelLogic{
 				
 				if (file.bad()) continue;
 				//Get the name of the file
-				uint16_t currentChar = path.length();
+				uint16_t currentChar = path.length() - 1;
 				while (path[currentChar] != '/'){
 					currentChar--;
 					name += path[currentChar];
