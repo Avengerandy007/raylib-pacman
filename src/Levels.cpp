@@ -9,6 +9,10 @@
 namespace LevelLogic{
 	std::vector<Level> levelData;
 	void GetLevelData(std::vector<Level>& list){
+
+		uint8_t currentLevel = 0;
+		uint16_t currentY = 250;
+
 		for (const auto& entry : std::filesystem::directory_iterator("./levels")){
 			//Get file from dir
 			std::ifstream file;
@@ -31,12 +35,13 @@ namespace LevelLogic{
 			//Create level and assign data to it
 			Level level;
 			level.data = FileI::FileContent(file);
+
 			//Get coin count of level
 			{
 				uint16_t currentChar = 0;
 				std::string coinCount = "";
 				// ammount of coins can't be bigger than 3 chars +1 for ','
-				while(currentChar <= 4){
+				while(currentChar <= 3){
 					if (level.data[currentChar] == ','){
 						level.data.erase(level.data.begin() + currentChar);
 						break;
@@ -48,6 +53,18 @@ namespace LevelLogic{
 			}
 			
 			level.name = name;
+			
+			//Set positions for levels
+			if (currentLevel % 2 == 0 && currentLevel != 0){
+				level.X = 250;
+				currentY += 250;
+			}else{
+				level.X = 750;
+			}
+			
+			level.Y = currentY;
+
+			currentLevel++;
 
 			list.push_back(level);
 		}
