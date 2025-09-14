@@ -73,7 +73,7 @@ namespace LevelLogic{
 	void Reload(){
 		std::ifstream file = FileI::FindFile();
 		Tile::tileSet = FileI::MakeMatrix(file);
-   		Tile::InitTileSet(50);
-		Tile::SetEntityRectangles();
+   		Tile::InitTileSet<20>(50, Tile::tileSet);
+		Tile::SetEntityRectangles<20>(Tile::tileSet);
 	}
 }

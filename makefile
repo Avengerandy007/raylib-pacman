@@ -1,11 +1,11 @@
 # Compiler
-CXX = x86_64-w64-mingw32-g++
-RayLib = ./Raylib
+CXX = g++
+RayLib = ./Raylib/
+LRayLib = ./Raylib/lib/libraylib.a
 
 # Windows deployment
-CXXFLAGS = -std=c++20 -Wall -g -I$(RayLib)/include -I./libpacman/include -static-libstdc++ -static-libgcc -O2 -DNDEBUG
-LDFLAGS  = -L$(RayLib)/lib -L./libpacman -lraylib -lpacman -lopengl32 -lgdi32 -lwinmm -mconsole #-mwindows
-
+CXXFLAGS = -std=c++20 -Wall -g -I$(RayLib)/include -I./libpacman/include -O2 -DNDEBUG
+LDFLAGS  =  $(LRayLib) -L./libpacman -lpacman -lm -ldl -lpthread -lGL -lrt -lX11
 # Files & directories
 SRCS := $(wildcard src/*.cpp)   # Only the LevelEditor sources
 BUILD_DIR := build

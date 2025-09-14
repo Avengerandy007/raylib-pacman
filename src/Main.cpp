@@ -20,9 +20,9 @@ int main(){
 
         InitRaylib();
 
-        InitTextures();
+	InitTextures();
 
-        Tile::InitTileSet();
+        Tile::InitTileSet<20>(50, Tile::tileSet);
         Update();
 
         CloseWindow();
