@@ -1,7 +1,10 @@
 #include "../include/Update.hpp"
-#include "../libpacman/include/FileI.hpp"
 #include "../include/Levels.hpp"
-#include <fstream>
+#include "../libpacman/include/Tile.hpp"
+#include "../libpacman/include/Entity.hpp"
+#include "../Raylib/include/raylib.h"
+#include <cstdint>
+
 bool running = false;
 void ResfreshWindow(){
         BeginDrawing();
@@ -29,12 +32,25 @@ void UpdateTiles(){
         }
 }
 
+void UpdateSelectionMenu(){
+	for(uint8_t i = 0; i < 100; i++){
+		for(uint8_t k = 0; k < 100; k++){
+			if (LevelLogic::entireSet.matrix[i][k].m_coinContainer){
+				LevelLogic::entireSet.matrix[i][k].m_coinContainer->Update();
+			}
+                        if (LevelLogic::entireSet.matrix[i][k].m_containedEntity){
+                                LevelLogic::entireSet.matrix[i][k].m_containedEntity->Update();
+                        }
+		}
+	}
+}
+
 void Update(){
 	running = true;
         while (running){
                 if (WindowShouldClose()) running = false;
                 ResfreshWindow();
-                UpdateTiles();
+		UpdateSelectionMenu();
 		if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_L)){
 			LevelLogic::Reload();
 		}

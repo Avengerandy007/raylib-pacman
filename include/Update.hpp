@@ -1,7 +1,5 @@
-#include "../libpacman/include/Tile.hpp"
-#include "../libpacman/include/Entity.hpp"
-#include "../Raylib/include/raylib.h"
-
+#pragma once
 extern bool running;
 extern void Update();
 extern void UpdateTiles();
+extern void UpdateSelectionMenu();
