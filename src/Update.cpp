@@ -36,9 +36,11 @@ void UpdateSelectionMenu(){
 	for(uint8_t i = 0; i < 100; i++){
 		for(uint8_t k = 0; k < 100; k++){
 			if (LevelLogic::entireSet.matrix[i][k].m_coinContainer){
+				std::cout << "Coin\n";
 				LevelLogic::entireSet.matrix[i][k].m_coinContainer->Update();
 			}
                         if (LevelLogic::entireSet.matrix[i][k].m_containedEntity){
+				std::cout << "Entity\n";
                                 LevelLogic::entireSet.matrix[i][k].m_containedEntity->Update();
                         }
 		}
@@ -46,6 +48,7 @@ void UpdateSelectionMenu(){
 }
 
 void Update(){
+	instance = LEVEL_EDITOR;
 	running = true;
         while (running){
                 if (WindowShouldClose()) running = false;

@@ -22,9 +22,9 @@ int main(){
 
 	InitTextures();
 
-        Tile::InitTileSet<100>(10, LevelLogic::entireSet);
 	LevelLogic::GetLevelData(LevelLogic::levelData);
 	LevelLogic::entireSet = LevelLogic::SetTileSet();
+        Tile::InitTileSet<100>(10, LevelLogic::entireSet);
 	Tile::SetEntityRectangles<100>(LevelLogic::entireSet);
         Update();
 
