@@ -1,4 +1,5 @@
 #include "../include/Levels.hpp"
+#include <algorithm>
 #include <bits/stdc++.h>
 #include <cstdint>
 #include <filesystem>
@@ -74,19 +75,16 @@ namespace LevelLogic{
 	}
 
 	 Matrix2<Tile, 100> SetTileSet(){
-		std::string entireData = "";
-		for (uint8_t i = 0; i < 100; i++){
-			for (uint8_t k = 0; k < 100; k++){
-				for(auto& level : levelData){
-					if (level.X == i && level.Y == k){
-						uint8_t currentChar = 0;
-						for(uint8_t j = 0; j < 4; j++){
-							entireData += level.data.substr(currentChar, currentChar + 20);
-							currentChar += 20;
-							for (uint8_t l = 0; l < 100 - (level.Y + 20); l++) entireData += "0";
-						}
-					}else entireData += "0";
-				}
+		std::string entireData;
+		entireData.resize(10000);
+		std::fill(entireData.begin(), entireData.begin() + 10000, '0');
+		for (auto& level : levelData){
+			uint16_t charToChange = level.Y * level.X;
+			uint8_t substrID = 0;
+			for (uint8_t i = 0; i < 3; i++){
+				entireData.replace(charToChange, charToChange + 20, level.data.substr(substrID, substrID + 20));
+				charToChange += (100 - level.Y) + level.Y;
+				substrID += 20;
 			}
 		}
 		std::cout << "Entire screen data: " << entireData << "\n";
