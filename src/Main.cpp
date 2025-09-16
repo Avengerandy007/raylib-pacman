@@ -26,6 +26,7 @@ int main(){
 	LevelLogic::entireSet = LevelLogic::SetTileSet();
         Tile::InitTileSet<100>(10, LevelLogic::entireSet);
 	Tile::SetEntityRectangles<100>(LevelLogic::entireSet);
+	
         Update();
 
         CloseWindow();

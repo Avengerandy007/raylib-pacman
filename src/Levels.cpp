@@ -78,8 +78,14 @@ namespace LevelLogic{
 		for (uint8_t i = 0; i < 100; i++){
 			for (uint8_t k = 0; k < 100; k++){
 				for(auto& level : levelData){
-					if (level.X  == i && level.Y == k) entireData += level.data;
-					else entireData += "0";
+					if (level.X == i && level.Y == k){
+						uint8_t currentChar = 0;
+						for(uint8_t j = 0; j < 4; j++){
+							entireData += level.data.substr(currentChar, currentChar + 20);
+							currentChar += 20;
+							for (uint8_t l = 0; l < 100 - (level.Y + 20); l++) entireData += "0";
+						}
+					}else entireData += "0";
 				}
 			}
 		}
