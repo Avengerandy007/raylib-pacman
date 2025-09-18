@@ -46,7 +46,6 @@ void UpdateSelectionMenu(){
 }
 
 void Update(){
-	instance = LEVEL_EDITOR;
 	running = true;
         while (running){
                 if (WindowShouldClose()) running = false;

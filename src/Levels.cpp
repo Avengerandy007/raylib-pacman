@@ -39,22 +39,13 @@ namespace LevelLogic{
 			Level level;
 			level.data = FileI::FileContent(file);
 
-			//Get coin count of level
 			{
-				uint16_t currentChar = 0;
-				std::string coinCount = "";
-				// amount of coins can't be bigger than 3 chars +1 for ','
-				while(currentChar <= 3){
-					if (level.data[currentChar] == ','){
-						level.data.erase(level.data.begin() + currentChar);
-						break;
-					}
-					coinCount += level.data[currentChar];
-					currentChar++;
-				}
-				level.coinCount = std::stoi(coinCount);
+				uint16_t ch = 0;
+				level.coinCount = FileI::GetCoinCount(level.data, ch);
 			}
-			
+
+			level.data.erase(0, std::to_string(level.coinCount).length() + 1);
+
 			level.name = name;
 			std::cout << name << " contains: " << level.data << "\n";
 			//Set positions for levels
@@ -75,16 +66,17 @@ namespace LevelLogic{
 	}
 
 	 Matrix2<Tile, 100> SetTileSet(){
-		std::string entireData;
-		entireData.resize(10000);
-		std::fill(entireData.begin(), entireData.begin() + 10000, '0');
+		std::string entireData = "";
+		entireData.append(10000, '0');
 		for (auto& level : levelData){
 			uint16_t charToChange = level.Y * level.X;
 			uint8_t substrID = 0;
 			for (uint8_t i = 0; i < 3; i++){
-				entireData.replace(charToChange, charToChange + 20, level.data.substr(substrID, substrID + 20));
+				for(uint8_t k = 0; k < 20; k++){
+					entireData[charToChange + k] = level.data[substrID];
+					substrID++;
+				}
 				charToChange += (100 - level.Y) + level.Y;
-				substrID += 20;
 			}
 		}
 		std::cout << "Entire screen data: " << entireData << "\n";
