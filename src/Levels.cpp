@@ -71,7 +71,7 @@ namespace LevelLogic{
 		for (auto& level : levelData){
 			uint16_t charToChange = level.Y * level.X;
 			uint8_t substrID = 0;
-			for (uint8_t i = 0; i < 3; i++){
+			for (uint8_t i = 0; i < 20; i++){
 				for(uint8_t k = 0; k < 20; k++){
 					entireData[charToChange + k] = level.data[substrID];
 					substrID++;
