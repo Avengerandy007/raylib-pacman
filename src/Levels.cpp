@@ -11,7 +11,10 @@ namespace LevelLogic{
 	std::vector<Level> levelData;
 	Matrix2<Tile, 100> entireSet;
 	void GetLevelData(std::vector<Level>& list){
-
+		Wall::Texture().Resize(10);
+		Player::Texture().Resize(10);
+		Coin::Texture().Resize(10);
+		Ghost::Texture().Resize(10);
 		uint8_t currentLevel = 0;
 		uint16_t currentY = 0;
 		uint16_t currentX = 0;
@@ -26,8 +29,8 @@ namespace LevelLogic{
 				
 				if (file.bad()) continue;
 				//Get the name of the file
-				uint16_t currentChar = path.length() - 1;
-				while (path[currentChar] != '/'){
+				uint16_t currentChar = path.length() - 2;
+				while (path[currentChar - 1] != '/'){
 					currentChar--;
 					name += path[currentChar];
 				}
