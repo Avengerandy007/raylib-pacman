@@ -13,7 +13,8 @@ namespace LevelLogic{
 	void GetLevelData(std::vector<Level>& list){
 
 		uint8_t currentLevel = 0;
-		uint16_t currentY = 25;
+		uint16_t currentY = 0;
+		uint16_t currentX = 0;
 
 		for (const auto& entry : std::filesystem::directory_iterator("./levels")){
 			//Get file from dir
@@ -49,14 +50,17 @@ namespace LevelLogic{
 			level.name = name;
 			std::cout << name << " contains: " << level.data << "\n";
 			//Set positions for levels
-			if (currentLevel % 2 == 0 && currentLevel != 0){
-				level.X = 0;
-				currentY += 25;
-			}else{
-				level.X = 25;
+			if (currentLevel % 5 == 0 && currentLevel != 0){
+				currentX = 0;
+				currentY += 20;
+				std::cout << "Going 1 down\n";
+			}else if (currentLevel != 0){
+				std::cout << "Going 1 left\n";
+				currentX += 20;
 			}
 			
 			level.Y = currentY;
+			level.X = currentX;
 
 			std::cout << name << " level: " << currentLevel << " is placed at " << level.X << "," << level.Y << "\n";
 			currentLevel++;
@@ -69,7 +73,7 @@ namespace LevelLogic{
 		std::string entireData = "";
 		entireData.append(10000, '0');
 		for (auto& level : levelData){
-			uint16_t charToChange = level.Y * level.X;
+			uint16_t charToChange = level.X * 100 + level.Y;
 			uint16_t substrID = 0;
 			for (uint8_t i = 0; i < 20; i++){
 				for(uint8_t k = 0; k < 20; k++){
