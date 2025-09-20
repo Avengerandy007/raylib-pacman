@@ -3,6 +3,7 @@
 #include "../libpacman/include/Tile.hpp"
 #include "../libpacman/include/Entity.hpp"
 #include "../Raylib/include/raylib.h"
+#include "../include/UI.hpp"
 #include <cstdint>
 
 bool running = false;
@@ -51,7 +52,15 @@ void Update(){
         while (running){
                 if (WindowShouldClose()) running = false;
                 ResfreshWindow();
-		UpdateSelectionMenu();
+		UI::NavigateUI();
+		switch (UI::mode){
+			case UIMode::MENU: break;
+			case UIMode::SELECTION:
+				UpdateSelectionMenu();
+				break;
+			case UIMode::GAME:
+				UpdateTiles();
+		}
 		if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_L)){
 			LevelLogic::Reload();
 		}

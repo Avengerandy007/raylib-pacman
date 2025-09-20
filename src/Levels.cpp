@@ -6,16 +6,28 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "../include/UI.hpp"
 
 namespace LevelLogic{
 	std::vector<Level> levelData;
 	Matrix2<Tile, 100> entireSet;
-	void GetLevelData(std::vector<Level>& list){
+
+	void SelectionScreen(){
+		UI::mode = UIMode::SELECTION;
+
 		Wall::Texture().Resize(10);
 		Player::Texture().Resize(10);
 		Coin::Texture().Resize(10);
 		Ghost::Texture().Resize(10);
-		uint8_t currentLevel = 0;
+
+		LevelLogic::GetLevelData(LevelLogic::levelData);
+		LevelLogic::entireSet = LevelLogic::SetTileSet();
+		Tile::InitTileSet<100>(10, LevelLogic::entireSet);
+		Tile::SetEntityRectangles<100>(LevelLogic::entireSet);
+	}
+
+	void GetLevelData(std::vector<Level>& list){
+				uint8_t currentLevel = 0;
 		uint16_t currentY = 0;
 		uint16_t currentX = 0;
 

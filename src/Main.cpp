@@ -1,5 +1,4 @@
 #include "../Raylib/include/raylib.h"
-#include "../include/Levels.hpp"
 #include "../include/Update.hpp"
 #include "../libpacman/include/Entity.hpp"
 void InitRaylib(){
@@ -22,11 +21,7 @@ int main(){
 
 	InitTextures();
 
-	LevelLogic::GetLevelData(LevelLogic::levelData);
-	LevelLogic::entireSet = LevelLogic::SetTileSet();
-        Tile::InitTileSet<100>(10, LevelLogic::entireSet);
-	Tile::SetEntityRectangles<100>(LevelLogic::entireSet);
-	
+		
         Update();
 
         CloseWindow();
