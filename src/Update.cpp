@@ -53,6 +53,8 @@ void UpdateSelectionMenu(){
 	if (LevelLogic::listeningForName){ 
 		LevelLogic::GetNameInput();
 		DrawText(LevelLogic::inputedName.c_str(), 0, 968, 32, WHITE);
+	}else{
+		DrawText("Press 'I' to enter level name", 0, 968, 32, WHITE);
 	}
 	if (IsKeyPressed(KEY_I)) LevelLogic::listeningForName = true;
 	if (IsKeyPressed(KEY_BACKSPACE) && LevelLogic::listeningForName && LevelLogic::inputedName != "") LevelLogic::inputedName.pop_back();
@@ -64,6 +66,12 @@ void UpdateSelectionMenu(){
 
 }
 
+void UpdateMenu(){
+	DrawText("SHIT PACMAN", 250, 100, 64, YELLOW);
+	DrawText("'S' - LEVEL SELECTION", 250, 300, 32, WHITE);
+	DrawText("'Q' - QUIT", 250, 350, 32, WHITE);
+}
+
 void Update(){
 	running = true;
         while (running){
@@ -71,7 +79,9 @@ void Update(){
                 ResfreshWindow();
 		UI::NavigateUI();
 		switch (UI::mode){
-			case UIMode::MENU: break;
+			case UIMode::MENU:
+				UpdateMenu();
+				break;
 			case UIMode::SELECTION:
 				UpdateSelectionMenu();
 				break;

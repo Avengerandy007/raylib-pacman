@@ -1,5 +1,6 @@
 #include "../include/UI.hpp"
 #include "../include/Levels.hpp"
+#include "../include/Update.hpp"
 #include "../Raylib/include/raylib.h"
 
 namespace UI{
@@ -9,6 +10,9 @@ namespace UI{
 			switch(GetKeyPressed()){
 				case KEY_S:
 					LevelLogic::SelectionScreen();
+					break;
+				case KEY_Q:
+					running = false;
 					break;
 			}
 		}else if (IsKeyPressed(KEY_ESCAPE)){
