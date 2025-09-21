@@ -69,7 +69,8 @@ void UpdateSelectionMenu(){
 void UpdateMenu(){
 	DrawText("SHIT PACMAN", 250, 100, 64, YELLOW);
 	DrawText("'S' - LEVEL SELECTION", 250, 300, 32, WHITE);
-	DrawText("'Q' - QUIT", 250, 350, 32, WHITE);
+	DrawText("'R' - RANDOM LEVEL", 250, 350, 32, WHITE);
+	DrawText("'Q' - QUIT", 250, 400, 32, WHITE);
 }
 
 void Update(){
