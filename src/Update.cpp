@@ -50,7 +50,10 @@ void UpdateSelectionMenu(){
 		level.Update();
 	}
 
-	if (LevelLogic::listeningForName) LevelLogic::GetNameInput();
+	if (LevelLogic::listeningForName){ 
+		LevelLogic::GetNameInput();
+		DrawText(LevelLogic::inputedName.c_str(), 0, 968, 32, WHITE);
+	}
 	if (IsKeyPressed(KEY_I)) LevelLogic::listeningForName = true;
 	if (IsKeyPressed(KEY_BACKSPACE) && LevelLogic::listeningForName && LevelLogic::inputedName != "") LevelLogic::inputedName.pop_back();
 	if (IsKeyPressed(KEY_ENTER)){
