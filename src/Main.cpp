@@ -1,5 +1,4 @@
 #include "../Raylib/include/raylib.h"
-#include "../libpacman/include/Tile.hpp"
 #include "../include/Update.hpp"
 #include "../libpacman/include/Entity.hpp"
 void InitRaylib(){
@@ -20,9 +19,8 @@ int main(){
 
         InitRaylib();
 
-        InitTextures();
+	InitTextures();
 
-        Tile::InitTileSet();
         Update();
 
         CloseWindow();

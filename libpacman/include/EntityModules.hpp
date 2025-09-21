@@ -22,12 +22,13 @@ struct TileCollider{
 
 class ImageTexture{
 	static const std::string path;
+	const std::string name;
 	Image image;
 	Texture2D texture;
-	void LoadTexturesInMap();
 public:
 	ImageTexture();
-	ImageTexture(std::string fileName);
+	ImageTexture(const std::string fileName);
+	void Resize(const uint8_t size);
 	void Render(std::shared_ptr<Rectangle> rect);
 	~ImageTexture();
 };
