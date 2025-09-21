@@ -10,6 +10,7 @@ struct Level{
 	std::string name;
 	
 	void Load();
+	void Update();
 };
 
 

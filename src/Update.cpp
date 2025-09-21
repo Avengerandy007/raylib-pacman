@@ -35,7 +35,6 @@ void UpdateTiles(){
 
 void UpdateSelectionMenu(){
 	instance = LEVEL_EDITOR;
-	std::cout << "Updating selction\n";
 	for(uint8_t i = 0; i < 100; i++){
 		for(uint8_t k = 0; k < 100; k++){
 			if (LevelLogic::entireSet.matrix[i][k].m_coinContainer){
@@ -45,6 +44,10 @@ void UpdateSelectionMenu(){
                                 LevelLogic::entireSet.matrix[i][k].m_containedEntity->Update();
                         }
 		}
+	}
+
+	for (auto& level : LevelLogic::levelData){
+		level.Update();
 	}
 
 	if (LevelLogic::listeningForName) LevelLogic::GetNameInput();

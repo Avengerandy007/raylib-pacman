@@ -5,6 +5,7 @@
 #include <filesystem>
 #include <fstream>
 #include <string>
+#include "../Raylib/include/raylib.h"
 #include <vector>
 #include "../include/UI.hpp"
 
@@ -24,6 +25,10 @@ void Level::Load(){
 	Tile::SetEntityRectangles<20>(Tile::tileSet);
 
 	std::cout << "Loaded " << name << "\n";
+}
+
+void Level::Update(){
+	DrawText(name.c_str(), X * 10, Y * 10 + 21 * 10, 32, WHITE);
 }
 
 
@@ -88,7 +93,7 @@ namespace LevelLogic{
 			//Set positions for levels
 			if (currentLevel % 5 == 0 && currentLevel != 0){
 				currentX = 0;
-				currentY += 20;
+				currentY += 25;
 				std::cout << "Going 1 down\n";
 			}else if (currentLevel != 0){
 				std::cout << "Going 1 left\n";
@@ -133,7 +138,6 @@ namespace LevelLogic{
 			}
 			key = GetCharPressed();
 		}
-		std::cout << inputedName << "\n";
 	}
 
 	
