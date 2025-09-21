@@ -140,8 +140,10 @@ namespace LevelLogic{
 	void SelectLevel(const std::string &levelName){
 		for(auto& level : levelData){
 			if (levelName == level.name){
+				std::cout << levelName << " matches " << level.name << "\n";
 				level.Load();
-				break;
+			}else{
+				std::cout << levelName << " does not match " << level.name << "\n";
 			}
 		}
 	}

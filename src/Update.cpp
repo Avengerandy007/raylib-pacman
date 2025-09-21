@@ -24,7 +24,7 @@ void UpdateTiles(){
                         if (Tile::tileSet.matrix[i][k].m_containedEntity){
 				if ((int)Player::score == (int)Coin::coinCount){
 					std::cout << "You win!\n";
-					LevelLogic::Reload();
+					UI::mode = UIMode::MENU;
 					break;
 				}
                                 Tile::tileSet.matrix[i][k].m_containedEntity->Update();
@@ -35,6 +35,7 @@ void UpdateTiles(){
 
 void UpdateSelectionMenu(){
 	instance = LEVEL_EDITOR;
+	std::cout << "Updating selction\n";
 	for(uint8_t i = 0; i < 100; i++){
 		for(uint8_t k = 0; k < 100; k++){
 			if (LevelLogic::entireSet.matrix[i][k].m_coinContainer){
@@ -48,12 +49,12 @@ void UpdateSelectionMenu(){
 
 	if (LevelLogic::listeningForName) LevelLogic::GetNameInput();
 	if (IsKeyPressed(KEY_I)) LevelLogic::listeningForName = true;
-	if (IsKeyPressed(KEY_ESCAPE)){
+	if (IsKeyPressed(KEY_BACKSPACE) && LevelLogic::listeningForName && LevelLogic::inputedName != "") LevelLogic::inputedName.pop_back();
+	if (IsKeyPressed(KEY_ENTER)){
 		LevelLogic::SelectLevel(LevelLogic::inputedName);
 		LevelLogic::inputedName.clear();
 		LevelLogic::listeningForName = false;
 	}
-	if (IsKeyPressed(KEY_BACKSPACE) && LevelLogic::listeningForName && LevelLogic::inputedName != "") LevelLogic::inputedName.pop_back();
 
 }
 
@@ -69,6 +70,7 @@ void Update(){
 				UpdateSelectionMenu();
 				break;
 			case UIMode::GAME:
+				instance = GAME;
 				UpdateTiles();
 				break;
 		}
