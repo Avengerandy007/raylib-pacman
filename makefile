@@ -3,7 +3,7 @@ CXX = x86_64-w64-mingw32-g++
 RayLib = ./Raylib
 
 # Windows deployment
-CXXFLAGS = -std=c++20 -Wall -g -I$(RayLib)/include -I./libpacman/include -static-libstdc++ -static-libgcc -O2 -DNDEBUG
+CXXFLAGS = -std=c++20 -Wall -g -I$(RayLib)/include -I./libpacman/include -static-libstdc++ -static-libgcc -static -pthread -O2 -DNDEBUG
 LDFLAGS  = -L$(RayLib)/lib -L./libpacman -lraylib -lpacman -lopengl32 -lgdi32 -lwinmm -mconsole #-mwindows
 
 # Files & directories
