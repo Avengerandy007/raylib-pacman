@@ -45,6 +45,16 @@ void UpdateSelectionMenu(){
                         }
 		}
 	}
+
+	if (LevelLogic::listeningForName) LevelLogic::GetNameInput();
+	if (IsKeyPressed(KEY_I)) LevelLogic::listeningForName = true;
+	if (IsKeyPressed(KEY_ESCAPE)){
+		LevelLogic::SelectLevel(LevelLogic::inputedName);
+		LevelLogic::inputedName.clear();
+		LevelLogic::listeningForName = false;
+	}
+	if (IsKeyPressed(KEY_BACKSPACE) && LevelLogic::listeningForName && LevelLogic::inputedName != "") LevelLogic::inputedName.pop_back();
+
 }
 
 void Update(){
@@ -60,6 +70,7 @@ void Update(){
 				break;
 			case UIMode::GAME:
 				UpdateTiles();
+				break;
 		}
 		if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_L)){
 			LevelLogic::Reload();

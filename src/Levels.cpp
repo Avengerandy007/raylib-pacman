@@ -8,9 +8,30 @@
 #include <vector>
 #include "../include/UI.hpp"
 
+
+void Level::Load(){
+	UI::mode = UIMode::GAME;
+
+	Wall::Texture().Resize(50);
+	Player::Texture().Resize(50);
+	Coin::Texture().Resize(50);
+	Ghost::Texture().Resize(50);
+
+
+	Tile::tileSet = FileI::CreateTileSet<20>(data, 0);
+	Coin::coinCount = coinCount;
+   	Tile::InitTileSet<20>(50, Tile::tileSet);
+	Tile::SetEntityRectangles<20>(Tile::tileSet);
+
+	std::cout << "Loaded " << name << "\n";
+}
+
+
 namespace LevelLogic{
 	std::vector<Level> levelData;
 	Matrix2<Tile, 100> entireSet;
+	std::string inputedName = "";
+	bool listeningForName = false;
 
 	void SelectionScreen(){
 		UI::mode = UIMode::SELECTION;
@@ -27,7 +48,7 @@ namespace LevelLogic{
 	}
 
 	void GetLevelData(std::vector<Level>& list){
-				uint8_t currentLevel = 0;
+		uint8_t currentLevel = 0;
 		uint16_t currentY = 0;
 		uint16_t currentX = 0;
 
@@ -101,6 +122,30 @@ namespace LevelLogic{
 		std::cout << "Entire screen data: " << entireData << "\n";
 		return FileI::CreateTileSet<100>(entireData, 0);
 	}
+
+
+
+	void GetNameInput(){
+		int key = GetCharPressed();
+		while (key > 0){
+			if (key >= 32 && key <= 126){
+				inputedName += static_cast<char>(key);
+			}
+			key = GetCharPressed();
+		}
+		std::cout << inputedName << "\n";
+	}
+
+	
+	void SelectLevel(const std::string &levelName){
+		for(auto& level : levelData){
+			if (levelName == level.name){
+				level.Load();
+				break;
+			}
+		}
+	}
+
 
 	void Reload(){
 		std::ifstream file = FileI::FindFile();
