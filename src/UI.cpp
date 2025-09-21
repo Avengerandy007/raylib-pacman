@@ -14,6 +14,9 @@ namespace UI{
 				case KEY_Q:
 					running = false;
 					break;
+				case KEY_R:
+					LevelLogic::LoadRandomLevel();
+					break;
 			}
 		}else if (IsKeyPressed(KEY_ESCAPE)){
 			mode = UIMode::MENU;

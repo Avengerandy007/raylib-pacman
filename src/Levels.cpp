@@ -152,6 +152,14 @@ namespace LevelLogic{
 		}
 	}
 
+	void LoadRandomLevel(){
+		LevelLogic::GetLevelData(LevelLogic::levelData);
+
+		int index = GetRandomValue(0, levelData.size() - 1);
+
+		levelData[index].Load();
+	}
+
 
 	void Reload(){
 		std::ifstream file = FileI::FindFile();

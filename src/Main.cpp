@@ -21,7 +21,6 @@ int main(){
 
 	InitTextures();
 
-		
         Update();
 
         CloseWindow();
