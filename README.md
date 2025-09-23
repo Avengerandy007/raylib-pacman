@@ -1,6 +1,6 @@
 # Build instructions
 
-## Requirments
+## Requirements
   - make
   - g++/mingw-g++
 ---
