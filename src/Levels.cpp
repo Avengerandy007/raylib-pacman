@@ -68,7 +68,11 @@ namespace LevelLogic{
 				if (file.bad()) continue;
 				//Get the name of the file
 				uint16_t currentChar = path.length() - 2;
+				#ifdef __linux__
 				while (path[currentChar - 1] != '/'){
+				#else
+				while (path[currentChar - 1] != '\'){
+				#endif
 					currentChar--;
 					name += path[currentChar];
 				}
