@@ -9,6 +9,12 @@
 #include <vector>
 #include "../include/UI.hpp"
 
+#ifdef __gnu_linux__
+bool comp_linux = true;
+#else
+bool comp_linux = false;
+#endif
+
 
 void Level::Load(){
 	UI::mode = UIMode::GAME;
@@ -68,14 +74,16 @@ namespace LevelLogic{
 				if (file.bad()) continue;
 				//Get the name of the file
 				uint16_t currentChar = path.length() - 2;
-				#ifdef __linux__
-				while (path[currentChar - 1] != '/'){
-				#else
-				while (path[currentChar - 1] != '\'){
-				#endif
-					currentChar--;
-					name += path[currentChar];
-				}
+				if(comp_linux)
+					while (path[currentChar - 1] != '/'){
+						currentChar--;
+						name += path[currentChar];
+					}
+				else 
+					while (path[currentChar - 1] != '\\'){
+						currentChar--;
+						name += path[currentChar];
+					}
 				
 				std::reverse(name.begin(), name.end());
 				std::cout << "Read: " << name << "\n";
