@@ -18,7 +18,6 @@ bool comp_linux = false;
 
 void Level::Load(){
 	UI::mode = UIMode::GAME;
-
 	Wall::Texture().Resize(50);
 	Player::Texture().Resize(50);
 	Coin::Texture().Resize(50);
@@ -59,7 +58,7 @@ namespace LevelLogic{
 	}
 
 	void GetLevelData(std::vector<Level>& list){
-		uint8_t currentLevel = 0;
+		uint16_t currentLevel = 0;
 		uint16_t currentY = 0;
 		uint16_t currentX = 0;
 
@@ -133,7 +132,7 @@ namespace LevelLogic{
 					entireData[charToChange + k] = level.data[substrID];
 					substrID++;
 				}
-				charToChange += (100 - level.Y) + level.Y;
+				charToChange += 100;
 			}
 		}
 		std::cout << "Entire screen data: " << entireData << "\n";

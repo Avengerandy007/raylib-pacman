@@ -12,7 +12,6 @@ void ResfreshWindow(){
 
         ClearBackground(BLACK);
 
-        EndDrawing();
 }
 
 void UpdateTiles(){
@@ -22,13 +21,14 @@ void UpdateTiles(){
 				Tile::tileSet.matrix[i][k].m_coinContainer->Update();
 			}
                         if (Tile::tileSet.matrix[i][k].m_containedEntity){
-				if ((int)Player::score == (int)Coin::coinCount){
-					std::cout << "You win!\n";
-					UI::mode = UIMode::MENU;
-					break;
-				}
+				
                                 Tile::tileSet.matrix[i][k].m_containedEntity->Update();
                         }
+			if ((int)Player::score == (int)Coin::coinCount){
+				std::cout << "You win!\n";
+				UI::mode = UIMode::MENU;
+				break;
+			}
                 }
         }
 }
@@ -40,7 +40,7 @@ void UpdateSelectionMenu(){
 			if (LevelLogic::entireSet.matrix[i][k].m_coinContainer){
 				LevelLogic::entireSet.matrix[i][k].m_coinContainer->Update();
 			}
-                        if (LevelLogic::entireSet.matrix[i][k].m_containedEntity){
+			else if (LevelLogic::entireSet.matrix[i][k].m_containedEntity){
                                 LevelLogic::entireSet.matrix[i][k].m_containedEntity->Update();
                         }
 		}
@@ -91,6 +91,7 @@ void Update(){
 				UpdateTiles();
 				break;
 		}
+        	EndDrawing();
 		if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_L)){
 			LevelLogic::Reload();
 		}
