@@ -35,7 +35,7 @@ public:
 
 class Coin : public Entity{
 public:
-	static uint8_t coinCount;
+	static uint16_t coinCount;
 	static ImageTexture& Texture();
 	Coin();
 	void Update() override;
